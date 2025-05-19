@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mineral Deficiency Info</title>
+  <style>
+ 
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #6C5B7B, #F1A7B8);
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .container {
+      background-color: rgba(255, 255, 255, 0.95);
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      width: 90%;
+      max-width: 700px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.8em;
+      color: #2c3e50;
+      margin-bottom: 20px;
+      letter-spacing: 1px;  
+      font-weight: bold;
+    }
+
+    p {
+      font-size: 1.1em;
+      margin-bottom: 20px;
+      color: #555;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      max-width: 500px;
+      padding: 15px;
+      font-size: 18px;
+      border: 2px solid #e1e4e8;
+      border-radius: 8px;
+      outline: none;
+      margin-bottom: 25px;
+      transition: all 0.3s ease-in-out;
+      color: #333;
+    }
+
+    input[type="text"]:focus {
+      border-color: #3498db;
+      box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+    }
+
+    button {
+      padding: 15px 30px;
+      background: linear-gradient(135deg, #3498db, #2980b9);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background: linear-gradient(135deg, #2980b9, #3498db);
+      transform: scale(1.05);
+    }
+
+    #imagica-btn {
+      background: linear-gradient(135deg, #e67e22, #d35400);
+    }
+
+    #imagica-btn:hover {
+      background: linear-gradient(135deg, #d35400, #e67e22);
+    }
+
+    #info {
+      margin-top: 30px;
+      text-align: left;
+      font-size: 1.2em;
+      background: #f8f8f8;
+      padding: 20px;
+      border-radius: 8px;
+      color: #333;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    #info h3 {
+      color: #2980b9;
+      font-size: 1.6em;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    #info p {
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 30px;
+      }
+
+      h1 {
+        font-size: 2.2em;
+      }
+
+      input[type="text"] {
+        width: 90%;
+      }
+
+      button {
+        width: 100%;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Mineral Deficiency Information</h1>
+    <p>Enter the name of a mineral (e.g., Iron, Magnesium, Zinc):</p>
+    
+    <input type="text" id="searchInput" placeholder="Search for a mineral..." />
+    <button onclick="searchDeficiency()">Search</button>
+
+    <div id="info"></div>
+
+    <a href="https://share.imagica.ai/?q=c084f769-8c94-41ef-8b30-031273d9174e" target="_blank">
+      <button id="imagica-btn">Open Imagica AI Resource</button>
+    </a>
+  </div>
+
+  <script>
+    const deficiencies = {
+      iron: "Iron is vital for oxygen transport in the blood via haemoglobin .Iron deficiency can lead to anemia, fatigue, impaired cognitive and social developmenet in children, and weakness. It’s often due to inadequate dietary intake or chronic blood loss.  Click below to receive advice on foods to eat for an iron rich diet",
+      magnesium: "Magnesium is involved in over 300 enzyme reaction, including: blood sugar control, blood pressure regulation, energy metabolism, and muscle & nerve function. Magnesium deficiency aka hypomagnesemia may cause muscle cramps, mental disorders,abnormal heart rhythyms,fatigue and in severe cases, seizures.  Click below to receive advice on foods to eat for a magnesium rich diet",
+      zinc: "Zinc is important for immune fuction, wound healing, DNA synthesis, and growth. Zinc deficiency can result in poor wound healing, impaired immune function, impaired taste, diarrhea, hair loss.its is especially critical during pregnancy and childhood. Click below to receive advice on foods to eat for an zinc rich diet",
+      calcium:"Calacium is essential for strong bones and teeth, muscle function, nerve signaling and hormone regulation. Calcium deficiency can cause brittle bones, muscle spasms, abnormal heart rhythms, osteopenia & osteoperosis. severe symptoms include muscle cramps, numbness, fatigue. Click below to receive advice on foods to eat for a calcium rich diet",
+      potassium: "Potassium functions as an electrolyte important for muscle contraction, heart function,and nerve signals. Low potassium may lead to muscle weakness, fatigue, irregular heartbeat, muscke cramps, constipation and in severe cases, paralysis. Click below to receive advice on foods to eat for a potassium rich diet",
+      iodine: "Iodine is need for thyroid hormone production and brain development. Iodine deficiency causes thyroid issues, goiter, developmental delays in children, and in pregnancy, can lead to severe developmental issues in the fetus, including stunted brain growth and cognitive impairment. Click below to receive advice on foods to eat for an iodine rich diet",
+    };
+
+    function searchDeficiency() {
+      const input = document.getElementById("searchInput").value.trim().toLowerCase();
+      const infoDiv = document.getElementById("info");
+
+      if (deficiencies[input]) {
+        infoDiv.innerHTML = `<h3>${input.charAt(0).toUpperCase() + input.slice(1)} Deficiency</h3><p>${deficiencies[input]}</p>`;
+      } else {
+        infoDiv.innerHTML = `<p>No information found for "${input}". Please try another mineral.</p>`;
+      }
+    }
+  </script>
+
+
+</body>
+</html>
